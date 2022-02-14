@@ -1,0 +1,193 @@
+Project Description Example Document
+
+
+
+
+
+
+
+Revision History
+
+Date	Description	Author	Comments
+2015-09-17	Version 1.0	NAME	Initial Requirements
+
+
+
+Notes:
+
+USE THIS DOCUMENT TEMPLATE FOR YOUR REQUIREMENTS, IT IS AN EXAMPLE TO SHOW YOU WHAT KIND OF INFORMATION TO ADD, THIS WILL ASSIST IN CAPTURING YOUR FULL REQUIREMENTS.
+
+
+
+•	PLEASE ADD ANY SCREEN SHOTS OF INDICATORS IN ACTION OR TRADE ENTRY AND EXIT POINTS. PICTURES OF YOUR STRATEGY WILL HELP MORE THAN ANY TEXT CAN.
+
+ 
+Contents
+REVISION HISTORY	I
+Notes:	i
+AUTOMATED TRADING STRATEGY (CBOT)	2
+USER DEFINED PARAMETERS	2
+INDICATORS	2
+LONG TRADES	3
+OPENING A POSITION	3
+CLOSING A POSITION	3
+LONG SL/TP and manual close of trades	3
+SHORT TRADES	4
+OPENING A POSITION	4
+CLOSING A POSITION	4
+SHORT SL/TP and manual close of trades.	4
+USAGE & SUPPORT	5
+LOGGING FEATURE	6
+NOTES	7
+
+
+
+
+
+
+ 
+Automated Trading Strategy (mql4/mql5 bot)
+
+•	To open trade (long and short), ALL OPEN trade settings must be true.
+•	To close a trade ONLY 1 SINGLE setting must be true.
+•	There will be many close trade settings. As soon as 1 of them becomes true. No matter which one, the trade will be stopped.
+
+USER DEFINED PARAMETERS
+These are the user options for your cBot in cAlgo, so your configurable parameters.
+
+
+1.	Include Zero Lag MACD (Yes/No)
+a.	Long Cycle
+b.	Short Cycle
+c.	Signal Periods
+d.	Include 0 rule for opening long (Yes/No)
+e.	Include 0 rule for closing long (Yes/No)
+f.	Include 0 rule for opening short (Yes/No)
+g.	Include 0 rule for closing short (Yes/No)
+h.	Include MACD Histogram Close Long (Yes/No)
+i.	Include MACD Trigger Close Long (Yes/No)
+j.	Include MACD Histogram Close Short (Yes/No)
+k.	Include MACD Trigger Close Short (Yes/No)
+2.	Include Stochastic Oscillator (Yes/No)
+a.	K% Periods
+b.	K% Slowing
+c.	D% Periods
+d.	Stochastic Oscillator MA Type - to choose between simple and exponential
+e.	Stochastic Open Long (Yes/No)
+f.	Stochastic Open Short (Yes/No)
+g.	Stochastic Close Long (Yes/No)
+h.	Stochastic Close Short (Yes/No)
+3.	Stop Loss (default 10)
+4.	Take Profit (default 30)
+5.	Lot Size (default 1000)
+6.	Long Trades (Yes/No)
+7.	Short Trades (Yes/No)
+
+ 
+INDICATORS
+
+•	Simple moving average period 12 (fast)
+•	Simple moving average period 26 (slow)
+•	Exponential moving average: 50
+•	Exponential moving average: 100
+•	ZERO lag MACD including histogram 
+•	Stochastic Oscillator 
+
+
+
+ 
+Long Trades
+Opening a Position 
+All the signals below must be true to open a long position.
+
+
+•	SMA 26 must be greater than SMA 12 
+•	EMA 50 must be greater than SMA 12 
+•	EMA 100 must be greater than SMA 12 
+•	MACD Zero-Lag line must be greater than MACD SIGNAL line
+•	MACD Zero-Lag line must be higher than 0 in value (OPTIONAL)
+•	MACD Crossover line must be greater than MACD SIGNAL line
+•	MACD Crossover line must be higher than 0 in value (OPTIONAL)
+•	Stochastic %K periods must be greater than %D periods
+•	Stochastic %K periods? must be less than 20
+Closing a Position
+
+Close long as soon as 1 of these signals happen; no matter which one the trade will close.
+
+
+1.	MACD Zero-Lag SIGNAL line is greater than MACD line
+2.	MACD Zero-Lag line becomes lower than 0 in value (OPTIONAL)
+3.	%K period is less than %D periods
+4.	%K period is greater than 80
+5.	Close short trade if zero lag MACD line value gets lower than MACD histogram value 
+a.	(OPTIONAL) – Activates (Stop trading rules) 
+6.	Close short trade if zero lag MACD TRIGGER line value gets lower than MACD histogram value
+a.	(OPTIONAL) – Activates (Stop trading rules)
+7.	Stop Loss
+a.	Activates (Stop trading rules)
+8.	Take Profit
+a.	Activates (Stop trading rules)
+
+
+LONG SL/TP and manual close of trades (RULES)
+
+If a LONG trade is closed with a stop loss or take profit, then the algo is no longer allowed to open a new LONG trade. Not even if all start long signals are true at the same time.
+
+To get permission to open a new long trade ONE of the following things must become true first.
+
+1.	MACD Zero Lag SIGNAL line becomes bigger than MACD line (NOT OPTIONAL)
+
+
+
+ 
+Short Trades
+Opening a Position 
+All the signals below must be true to open a short position.
+
+•	SMA 26 must be less than SMA 12
+•	EMA 50 must be less than SMA 12
+•	EMA 100 must be less than SMA 12
+•	MACD Zero-Lag line must be less than MACD SIGNAL line
+•	MACD Zero-Lag line must be lower than 0 in value (OPTIONAL)
+•	Stochastic %K periods must be less than %D periods
+•	Stochastic %K periods? must be greater than 80
+
+Closing a Position
+
+Close long as soon as 1 of these signals happen; no matter which one the trade will close.
+
+
+1.	MACD Zero Lag SIGNAL line becomes smaller than MACD line
+2.	MACD Zero Lag line becomes higher than 0 in value (OPTIONAL)
+3.	%K period is greater than %D periods
+4.	%K period is less than 20
+5.	Close short trade if zero lag MACD line value gets higher than MACD histogram value 
+a.	(OPTIONAL) – Activates (Stop trading rules) 
+6.	Close short trade if zero lag MACD TRIGGER line value gets higher than MACD histogram value
+a.	(OPTIONAL) – Activates (Stop trading rules)
+7.	Stop Loss
+a.	Activates (Stop trading rules)
+8.	Take Profit
+a.	Activates (Stop trading rules)
+
+
+SHORT SL/TP and manual close of trades. (RULES)
+
+
+If a SHORT trade is closed with a stop loss or take profit, then the algo is no longer allowed to open a new SHORT trade. Not even if all start short signals are true at the same time.
+
+To get permission to open a new short trade ONE of the following things must become true first: -
+
+1.	MACD Zero Lag SIGNAL line becomes smaller than MACD line (NOT OPTIONAL)
+
+After ONE of the two things, have become true. The algo is again allowed to open a short trade if all signals are true.
+
+ 
+Developer Notes
+
+[COMPLETED BY DEVELOPER]
+
+
+
+
+
